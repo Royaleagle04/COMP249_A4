@@ -1,3 +1,11 @@
+// -----------------------------------------------------
+// Assignment 4
+// COMP249
+// Written by: Azal Al-Mashta, 40179492, Craig Kogan, 40175780
+// Due Date 04/19/2021
+// This program intakes a .txt file and parses through it, outputting three .txt files derived from the input. 
+// -----------------------------------------------------
+
 package part1;
 
 import java.util.ArrayList;
@@ -9,9 +17,23 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * @author Azal Al-Mashta - 40179492 & Craig Kogan - 40175780
+ * <br> Class COMP249 Section QQ
+ * <br> AssignemtnNb Assignment 4
+ * <br> Due 04/19/2021
+ * 
+ * driver class
+ * contains the main method. There are no submethods. 
+ */
 public class driver {
 
-	//main must throw a FileNotFoundException in order to read in the file (line 55)
+	//main must throw a FileNotFoundException in order to read in the file (line 82)
+	/**
+	 * main method. Contains all functions including the request for the txt file input as well as the printing of the three outputs. 
+	 * @param args
+	 * @throws FileNotFoundException
+	 */
 	public static void main (String[] args) throws FileNotFoundException {
 
 		//variable initialization block - split by type
@@ -24,7 +46,10 @@ public class driver {
 		String vowelTest;
 		
 		File temp;
-		
+		File obsessiveOFILE = new File("obsessive_o.txt");
+		File vowelVerbiageFILE = new File("vowel_verbiage.txt");
+		File distinctDataFILE = new File("distinct_data.txt");
+
 		ArrayList<String> obsessiveO = new ArrayList<String>(0);
 		ArrayList<String> vowelVerbiage = new ArrayList<String>(0);
 		ArrayList<String> distinctData = new ArrayList<String>(0);
@@ -108,13 +133,33 @@ public class driver {
 
 		} //end of WHILE - IStream.hasNext
 		
-		//just some debug helpers
-		int x = 0;
-		int y = 0;
 		
-		System.out.println("Obsessive O's, not to be confused with orange julep: " + obsessiveO.size());
-		System.out.println("Vowel on like you ain't gonna stop: " + vowelVerbiage.size());
-		System.out.println("Distinct, clean like the spring waters: " + distinctData.size());
+		//printing of files
+		PrintWriter OStreamO = new PrintWriter(obsessiveOFILE);
+		for (int i = 0; i < obsessiveO.size(); i++) {
+			if (i == 0)
+				OStreamO.println("Word count: " + obsessiveO.size());
+			OStreamO.println(obsessiveO.get(i));
+		}
+		OStreamO.close();
+		
+		
+		PrintWriter OStreamV = new PrintWriter(vowelVerbiageFILE);
+		for (int i = 0; i < vowelVerbiage.size(); i++) {
+			if (i == 0)
+				OStreamV.println("Word count: " + vowelVerbiage.size());
+			OStreamV.println(vowelVerbiage.get(i));
+		}
+		OStreamV.close();
+		
+		
+		PrintWriter OStreamD = new PrintWriter(distinctDataFILE);
+		for (int i = 0; i < distinctData.size(); i++) {
+			if (i == 0)
+				OStreamD.println("Word count: " + distinctData.size());
+			OStreamD.println(distinctData.get(i));
+		}
+		OStreamD.close();
 		
 		System.out.println("It's over!");
 		
