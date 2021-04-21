@@ -3,10 +3,13 @@ package part2;
 import java.util.NoSuchElementException;
 
 public class ShowList{
+	//attributes
 	class ShowNode implements Cloneable{
+		//attributes
 		private TVShow TVShow;
 		private ShowNode pointer;
 		
+		//constructors
 		public ShowNode() {
 			this.TVShow=null;
 			this.pointer=null;
@@ -19,6 +22,8 @@ public class ShowList{
 			this.TVShow=otherShowNode.TVShow;
 			this.pointer=otherShowNode.pointer;
 		}
+		
+		//methods
 		public TVShow clone(String showID) throws CloneNotSupportedException {
 	        return (TVShow) super.clone();
 	    }
@@ -38,26 +43,25 @@ public class ShowList{
 		}
 		
 	}//end class ShowNode (inner)
-
 	private ShowNode head;
 	private int size;
 	
+	//constructors
 	public ShowList() {
 		this.head=null;
 		this.size=0;
 	}
-	
 	//copy constructor
 	public ShowList(ShowList otherShowList) {
 		this.head=otherShowList.head;
 		this.size=otherShowList.size;
 	}
 	
+	//methods
 	public void addToStart(TVShow newTVShow) {
 		head=new ShowNode(newTVShow,head);
 		size++;
-	}
-	
+	}	
 	public void insertAtIndex(TVShow newTVShow, int index) {
 		if(index<0 || index>size-1)
 			throw new NoSuchElementException();
@@ -89,8 +93,7 @@ public class ShowList{
 			before.setPointer(position.getPointer());
 			size--;
 		}
-	}
-	
+	}	
 	public void deleteFromStart() {
 		if(size==0) {
 			throw new NoSuchElementException();
@@ -104,7 +107,6 @@ public class ShowList{
 			size--;
 		}	
 	}
-	
 	public void replaceAtIndex(TVShow newTVShow, int index) {
 		if(index<0 || index>size-1) {
 			System.out.println("Invalid index, did not replace");
@@ -123,7 +125,6 @@ public class ShowList{
 			newNode.setPointer(position.getPointer());
 		}
 	}
-
 	public ShowNode find(String showID) {
 		ShowNode position=head;
 		while(position!=null) {
@@ -132,11 +133,9 @@ public class ShowList{
 		}
 		return null;
 	}
-	
 	public boolean contains(String showID) {
 		return (find(showID) != null);
 	}
-	
 	public boolean equals(ShowList otherShowList) {
 		if(this.getClass() ==otherShowList.getClass() && otherShowList!=null && this.size==otherShowList.size) {
 		ShowNode thisPosition=this.head;
@@ -148,5 +147,18 @@ public class ShowList{
 			return true;
 		}
 		return false;
+	}//end equals method
+	public ShowNode getHead() {
+		return head;
 	}
+	public void setHead(ShowNode head) {
+		this.head = head;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
 }//end class ShowList(outer)
